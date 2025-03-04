@@ -89,6 +89,7 @@ public class Config {
 
 	}
 	
+	@Bean
 	public TaskExecutor taskExecutor() {
 		SimpleAsyncTaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
 		taskExecutor.setConcurrencyLimit(10);

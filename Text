@@ -1,0 +1,3 @@
+Task Executor for concurrency execution of reading processing and writing 
+but we dont have controle of flow
+for flow controll we can implenent partitioning 
