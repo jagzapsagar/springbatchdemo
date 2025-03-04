@@ -15,6 +15,8 @@ import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @EnableBatchProcessing
@@ -43,6 +45,7 @@ public class Config {
 				.reader(reader()) // Define the reader bean method
 				.processor(processor()) // Define the processor bean method
 				.writer(writer()) // Define the writer bean method
+				.taskExecutor(taskExecutor())
 				.build();
 	}
 
@@ -84,6 +87,12 @@ public class Config {
 		lineMapper.setFieldSetMapper(fieldSetMapper);
 		return lineMapper;
 
+	}
+	
+	public TaskExecutor taskExecutor() {
+		SimpleAsyncTaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
+		taskExecutor.setConcurrencyLimit(10);
+		return taskExecutor;
 	}
 
 }
